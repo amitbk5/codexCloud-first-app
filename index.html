@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101a1b" />
+    <meta name="description" content="Ember & Ash — a hand-crafted fantasy arena adventure. Become Lyra, wield the emberblade, and reclaim the Hollow Sanctum." />
+    <title>Ember & Ash — The Hollow Sanctum</title>
+    <link rel="icon" type="image/svg+xml" href="./sigil.svg" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="site-header">
+        <a class="wordmark" href="./" aria-label="Ember and Ash home">
+          <svg class="brand-sigil" viewBox="0 0 40 48" aria-hidden="true"><path d="M20 2 29 19 20 46 11 19Z"/><path d="m3 24 17 8 17-8M20 8v30"/></svg>
+          <span>EMBER <i>&</i> ASH</span>
+        </a>
+        <div class="header-right"><span class="build-tag"><span></span> A PLAYABLE LITTLE ADVENTURE</span><a class="about-link" href="#field-guide">Field guide <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8"/></svg></a></div>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="game-title">
+          <div><p class="eyebrow">STEEL IN HER HAND. FIRE IN HER HEART.</p><h1 id="game-title">Some legends begin with <em>one last stand.</em></h1><p class="intro-copy">Step into the ruins. Find your rhythm. Leave nothing but embers.</p></div>
+          <div class="chapter-label"><span class="chapter-number">I</span><div><span class="eyebrow">CHAPTER ONE</span><p>The Hollow Sanctum</p></div></div>
+        </section>
+
+        <section class="game-shell" aria-label="Ember and Ash game">
+          <div class="game-frame" id="game-frame">
+            <canvas id="game" width="1280" height="720" tabindex="0" aria-label="Fantasy arena game. Move with WASD or arrows, attack with J, dodge with Space, cast magic with K, and pause with Escape."></canvas>
+            <div class="game-vignette"></div>
+
+            <div class="hud" id="hud">
+              <div class="hero-hud"><div class="portrait" aria-hidden="true"><svg viewBox="0 0 52 58"><path fill="#782f36" d="M7 58 12 34 40 34 48 58Z"/><path fill="#263938" d="M12 36C2 9 19-2 31 5c15 2 14 24 8 35L32 19Z"/><path fill="#e8bfa0" d="M16 17c-2 27 20 29 21 2L26 9Z"/><path fill="#192826" d="m12 20 3-14 19 1 5 15-11-11Z"/><path fill="#ddb775" d="m15 18 11-6 12 6-12-2Z"/><path stroke="#293231" stroke-width="1.4" d="m18 23 5 1m7 0 5-1"/><path fill="#ddb775" d="m14 43 12-7 14 8-5 14H19Z"/></svg></div><div class="vitals"><div class="hero-name">LYRA <span>THE EMBERBOUND</span></div><div class="health-track" role="progressbar" aria-label="Health" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div id="health-fill"></div></div><div class="ember-meter"><span id="ember-1" class="ember charged">◆</span><span id="ember-2" class="ember charged">◆</span><span id="ember-3" class="ember charged">◆</span><span class="ember-label">EMBER MAGIC</span></div></div></div>
+              <div class="wave-hud"><span class="eyebrow" id="wave-label">THE HOLLOW SANCTUM</span><div id="wave-value">AWAITING A HERO</div><span id="enemies-left"></span></div>
+            </div>
+
+            <div class="arena-caption" id="arena-caption"><span class="location-mark">✧</span><span>THE HOLLOW SANCTUM</span><span class="caption-line"></span><span>MOONFALL, THE THIRD AGE</span></div>
+            <div class="combo-display" id="combo-display"><strong id="combo-count">0</strong><span>HIT COMBO</span></div>
+            <div class="wave-banner" id="wave-banner" aria-live="polite"><span id="banner-kicker"></span><strong id="banner-title"></strong></div>
+
+            <div class="screen-overlay" id="overlay">
+              <div class="start-card" id="start-card">
+                <p class="eyebrow">AN EMBER STILL BURNS</p><h2>The night is theirs.<br><em>The next move is yours.</em></h2><p>A forgotten sanctuary. An ancient darkness.<br>One warrior who refuses to yield.</p>
+                <button class="primary-button" id="start-button">Enter the sanctum <span>→</span></button><span class="start-hint">THREE WAVES · ONE LAST STAND</span>
+              </div>
+              <div class="result-card" id="result-card" hidden><p class="eyebrow" id="result-kicker"></p><h2 id="result-title"></h2><p id="result-description"></p><div class="run-stats"><div><strong id="stat-defeated">0</strong><span>FOES FELLED</span></div><div><strong id="stat-combo">0</strong><span>BEST COMBO</span></div><div><strong id="stat-time">0:00</strong><span>TIME IN BATTLE</span></div></div><button class="primary-button" id="restart-button">Another last stand <span>↻</span></button></div>
+              <div class="pause-card" id="pause-card" hidden><p class="eyebrow">TAKE A BREATH</p><h2>The embers can wait.</h2><p>Your adventure is paused.</p><button class="primary-button" id="resume-button">Back to the fight <span>→</span></button><button class="text-button" id="quit-button">Return to the sanctuary</button></div>
+            </div>
+
+            <div class="game-toolbar"><span class="live-tag"><i></i><span id="status-label">READY WHEN YOU ARE</span></span><div><button id="sound-button" class="icon-button" aria-label="Enable sound" aria-pressed="false" title="Toggle sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4Z"/><path id="sound-waves" d="m16 9 6 6m0-6-6 6"/></svg></button><button id="pause-button" class="icon-button" aria-label="Pause game" title="Pause (Esc)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button><button id="fullscreen-button" class="icon-button" aria-label="Enter fullscreen" title="Fullscreen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div></div>
+
+            <div class="touch-controls" id="touch-controls"><div class="touch-dpad"><button data-control="up" aria-label="Move up">↑</button><button data-control="left" aria-label="Move left">←</button><button data-control="down" aria-label="Move down">↓</button><button data-control="right" aria-label="Move right">→</button></div><div class="touch-actions"><button data-control="dodge">DODGE</button><button data-control="magic">MAGIC</button><button data-control="attack">STRIKE</button></div></div>
+          </div>
+          <div class="controls-strip" id="field-guide"><div class="control-group"><span class="key-set"><kbd>W</kbd><span><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span></span><span>Move<span class="control-secondary">or arrow keys</span></span></div><div class="control-group"><kbd>J</kbd><span>Strike<span class="control-secondary">chain a 3-hit combo</span></span></div><div class="control-group"><kbd>SPACE</kbd><span>Dodge<span class="control-secondary">a moment of invincibility</span></span></div><div class="control-group"><kbd>K</kbd><span>Ember burst<span class="control-secondary">make some breathing room</span></span></div><div class="control-group pause-guide"><kbd>ESC</kbd><span>Pause<span class="control-secondary">the world can wait</span></span></div></div>
+        </section>
+        <footer class="footer"><p><span class="small-sigil">✧</span> A small world. A worthy fight.</p><span>ORIGINAL FANTASY ARCADE · BUILT TO BE PLAYED</span><p class="footer-tip">Tip: close the distance, then strike. <span>Timing is everything.</span></p></footer>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
